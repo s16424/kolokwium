@@ -50,16 +50,16 @@ namespace kolokwium_s16424_AP.Controllers
     public IActionResult AddPrescription([FromBody]AddPrescriptionRequest request)
         {
             var pr = new AddPrescriptionRequest();
-            pr.Date = request.Date;
-            pr.DueDate = request.DueDate;
+            pr.Date = (DateTime)request.Date;
+            pr.DueDate = (DateTime)request.DueDate;
 
             if (pr.DueDate > pr.Date)
             {
                 return BadRequest("Zle dane - data waznosci dalsza niz data wystawienia recepty");
             }
 
-            pr.idDoctor = request.idDoctor;
-            pr.idPatient = request.idPatient;
+            pr.idDoctor = (int)(request.idDoctor);
+            pr.idPatient = (int)request.idPatient;
 
             using (var con = new SqlConnection("Data Source=db-mssql ;Initial Catalog=s16424; Integrated Security = True"))
             using (var com = new SqlCommand())
